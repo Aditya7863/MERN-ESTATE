@@ -1,0 +1,26 @@
+{
+  "name": "vite-app",
+  "version": "0.0.0",
+  "description": "Vite Application",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "vite",
+    "build": "vite build",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "node --watch --env-file=.env api/index.js",
+    "client": "npm start --prefix client",
+    "install-client": "npm install --prefix client",
+    "build-client": "npm run build --prefix client"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "vite": "^5.2.0"
+  }
+}
