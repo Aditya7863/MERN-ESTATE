@@ -28,13 +28,16 @@ export const signup = asyncHandler(async (req, res, next) => {
     res.status(201).json(newUser);
 })
 
+// @desc Sign in user
+// @route POST /api/auth/signip
+// @access Public
 export const signin = asyncHandler(async (req, res, next) => {
     const { email, password } = req.body;
     const validUser = await User.findOne({ email });
     if (validUser && await bcrypt.compare(password, validUser.password)) {
         const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
         const {password:pass,...rest} = validUser._doc;
-        
+
         res.cookie('access_token', token, { httpOnly: true, expires: new Date(Date.now() + 24 * 60 * 60 * 1000) }).status(200).json({rest});
     } else {
         const error = new Error('Invalid email or password');
